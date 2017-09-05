@@ -32,41 +32,41 @@ this.f = new (require("FlashEEPROM"))();
 require("SSD1306");
 require("Font8x16").add(Graphics);
 
-this.irCods = {};
-this.irCods.calibrationStart = 25803148087;
-this.irCods.calibrationStart_errror = 6450787021;
+this.irCodes = {};
+this.irCodes.calibrationStart = 25803148087;
+this.irCodes.calibrationStart_errror = 6450787021;
 
-this.irCods.RedPower = 6450774781;
-this.irCods.RedPower_error = 25803099127;
-this.irCods.Setup = 6450823741;
-this.irCods.Setup_error = 25803294967;
-this.irCods.Up = 6450800791;
-this.irCods.Up_2 = 25803203167;
-this.irCods.Down = 6450796711;
-this.irCods.Down_error = 25803186847;
-this.irCods.Left = 6450809461;
-this.irCods.Left_error = 25803237847;
-this.irCods.Right = 6450776821;
-this.irCods.Right_error = 25803107287;
-this.irCods.Ok = 6450825271;
-this.irCods.Ok_error = 25803301087;
-this.irCods.Ok_error2 = '';
-this.irCods.StepperEn = '';
+this.irCodes.RedPower = 6450774781;
+this.irCodes.RedPower_2 = 25803099127;
+this.irCodes.Setup = 6450823741;
+this.irCodes.Setup_2 = 25803294967;
+this.irCodes.Up = 6450800791;
+this.irCodes.Up_2 = 25803203167;
+this.irCodes.Down = 6450796711;
+this.irCodes.Down_2 = 25803186847;
+this.irCodes.Left = 6450809461;
+this.irCodes.Left_2 = 25803237847;
+this.irCodes.Right = 6450776821;
+this.irCodes.Right_2 = 25803107287;
+this.irCodes.Ok = 6450825271;
+this.irCodes.Ok_2 = 25803301087;
+this.irCodes.Ok_3 = '';
+this.irCodes.StepperEn = '';
 
-this.irCodsDig = {};
-this.irCodsDig._1 = 6450803341;
-this.irCodsDig._2 = 6450819151;
-this.irCodsDig._2_error = 8888888888888;
-this.irCodsDig._3 = 6450786511;
-this.irCodsDig._4 = 6450795181;
-this.irCodsDig._5 = 6450810991;
-this.irCodsDig._6 = 6450778351;
-this.irCodsDig._7 = 6450799261;
-this.irCodsDig._8 = 6450815071;
-this.irCodsDig._8_error = 25803260287;
-this.irCodsDig._9 = 6450782431;
-this.irCodsDig._0 = 6450806911;
-this.irCodsDig._0_error = 25803227647;
+this.irCodesDig = {};
+this.irCodesDig._1 = 6450803341;
+this.irCodesDig._2 = 6450819151;
+this.irCodesDig._2_2 = 8888888888888;
+this.irCodesDig._3 = 6450786511;
+this.irCodesDig._4 = 6450795181;
+this.irCodesDig._5 = 6450810991;
+this.irCodesDig._6 = 6450778351;
+this.irCodesDig._7 = 6450799261;
+this.irCodesDig._8 = 6450815071;
+this.irCodesDig._8_2 = 25803260287;
+this.irCodesDig._9 = 6450782431;
+this.irCodesDig._0 = 6450806911;
+this.irCodesDig._0_2 = 25803227647;
 
 this.right = 1;
 this.left = 0;
@@ -131,31 +131,31 @@ this.startFlag = false;
 require("IRReceiver").connect(A0, function(code) {
   this._code = parseInt(code, 2);
   
-  if (this.setupMode && this._code === this.irCodsDig._1 || this.setupMode && this._code === this.irCodsDig._2 || this.setupMode && this._code === this.irCodsDig._3 || this.setupMode && this._code === this.irCodsDig._4 || this.setupMode && this._code === this.irCodsDig._5 || this.setupMode && this._code === this.irCodsDig._6 || this.setupMode && this._code === this.irCodsDig._7 || this.setupMode && this._code === this.irCodsDig._8 || this.setupMode && this._code === this.irCodsDig._9 || this.setupMode && this._code === this.irCodsDig._0) {
+  if (this.setupMode && this._code === this.irCodesDig._1 || this.setupMode && this._code === this.irCodesDig._2 || this.setupMode && this._code === this.irCodesDig._3 || this.setupMode && this._code === this.irCodesDig._4 || this.setupMode && this._code === this.irCodesDig._5 || this.setupMode && this._code === this.irCodesDig._6 || this.setupMode && this._code === this.irCodesDig._7 || this.setupMode && this._code === this.irCodesDig._8 || this.setupMode && this._code === this.irCodesDig._9 || this.setupMode && this._code === this.irCodesDig._0) {
   console.log('input');
     IrInput();
     return;
   }
-  if (this._code === this.irCods.Setup && !this.setupMode && !this.poweroff || this._code === this.irCods.Setup_error && !this.setupMode && !this.poweroff) {
+  if (this._code === this.irCodes.Setup && !this.setupMode && !this.poweroff || this._code === this.irCodes.Setup_2 && !this.setupMode && !this.poweroff) {
     SettingsDisplay_1();
     console.log('Setup');
     this.simNum = 0;
     return;
-  } else if (this._code === this.irCods.Setup && this.setupMode || this._code === this.irCods.Setup_error && this.setupMode) {
+  } else if (this._code === this.irCodes.Setup && this.setupMode || this._code === this.irCodes.Setup_2 && this.setupMode) {
     this.setupMode = false;
     NumControl();
     StartDisplay();
     console.log('Setup Exit');
     return;
   }
-  if (this._code === this.irCods.Ok && this.startFlag && !this.poweroff || this._code === this.irCods.Ok_error && this.startFlag && !this.poweroff || this._code === this.irCods.Ok_error2 && this.startFlag && !this.poweroff) {
+  if (this._code === this.irCodes.Ok && this.startFlag && !this.poweroff || this._code === this.irCodes.Ok_2 && this.startFlag && !this.poweroff || this._code === this.irCodes.Ok_3 && this.startFlag && !this.poweroff) {
     this.startFlag = false;
     BtnStop();
     console.log('OK STOP');
     this.simNum = 0;
     return;
   }
-  if (this._code === this.irCods.Ok && !this.startFlag && !this.poweroff || this._code === irCods.Ok_error && !this.startFlag && !this.poweroff || this._code === this.irCods.Ok_error2 && !this.poweroff && !this.startFlag) {
+  if (this._code === this.irCodes.Ok && !this.startFlag && !this.poweroff || this._code === irCodes.Ok_2 && !this.startFlag && !this.poweroff || this._code === this.irCodes.Ok_3 && !this.poweroff && !this.startFlag) {
     this.startFlag = true;
     StartDisplay();
     Start();
@@ -163,59 +163,59 @@ require("IRReceiver").connect(A0, function(code) {
     this.simNum = 0;
     return;
   }
-  if (this._code === this.irCods.Down && !this.dispay_2 && this.setupMode || this._code === this.irCods.Down_error && !this.dispay_2 && this.setupMode) {
+  if (this._code === this.irCodes.Down && !this.dispay_2 && this.setupMode || this._code === this.irCodes.Down_2 && !this.dispay_2 && this.setupMode) {
     this.marker = this.marker + this.indent;
     SettingsDisplay_1();
     this.simNum = 0;
     console.log('Down D1');
     return;
-  } else if (this._code === this.irCods.Down && this.dispay_2 && this.setupMode || this._code === this.irCods.Down_error && this.dispay_2 && this.setupMode) {
+  } else if (this._code === this.irCodes.Down && this.dispay_2 && this.setupMode || this._code === this.irCodes.Down_2 && this.dispay_2 && this.setupMode) {
     this.marker = this.marker + this.indent;
     SettingsDisplay_2();
     console.log('Down D2');
     this.simNum = 0;
     return;
   }
-   if (this._code === this.irCods.Up && !this.dispay_2 && this.setupMode || this._code === this.irCods.Up_2 && !this.dispay_2 && this.setupMode) {
+   if (this._code === this.irCodes.Up && !this.dispay_2 && this.setupMode || this._code === this.irCodes.Up_2 && !this.dispay_2 && this.setupMode) {
     this.marker = this.marker - this.indent;
     SettingsDisplay_1();
     this.simNum = 0;
     console.log('UP D1');
     return;
-  } else if (this._code === this.irCods.Up && this.dispay_2 && this.setupMode || this._code === this.irCods.Up_2 && this.dispay_2 && this.setupMode) {
+  } else if (this._code === this.irCodes.Up && this.dispay_2 && this.setupMode || this._code === this.irCodes.Up_2 && this.dispay_2 && this.setupMode) {
     this.marker = this.marker - this.indent;
     SettingsDisplay_2();
     console.log('UP D2');
     this.simNum = 0;
     return;
   }
-  if (this._code === this.irCods.Right_error && !this.dispay_2 && this.setupMode || this._code === this.irCods.Right && !this.dispay_2 && this.setupMode) {
+  if (this._code === this.irCodes.Right_2 && !this.dispay_2 && this.setupMode || this._code === this.irCodes.Right && !this.dispay_2 && this.setupMode) {
     SettingsDisplay_2();
     console.log('Right');
     this.simNum = 0;
     return;
   }
-  if (this._code === this.irCods.Left_error && this.dispay_2 && this.setupMode || this._code === this.irCods.Left && this.dispay_2 && this.setupMode) {
+  if (this._code === this.irCodes.Left_2 && this.dispay_2 && this.setupMode || this._code === this.irCodes.Left && this.dispay_2 && this.setupMode) {
     SettingsDisplay_1();
     console.log('Left');
     this.simNum = 0;
     return;
   }
-  if (this._code === this.irCods.StepperEn && !this.poweroff) {
+  if (this._code === this.irCodes.StepperEn && !this.poweroff) {
   }
-  if (this._code === this.irCods.calibrationStart && !this.calibration&& !this.poweroff || this._code === this.irCods.calibrationStart_errror && !this.calibration && !this.poweroff) {
+  if (this._code === this.irCodes.calibrationStart && !this.calibration&& !this.poweroff || this._code === this.irCodes.calibrationStart_errror && !this.calibration && !this.poweroff) {
     Calibration();
     return;
-  } else if (this._code === this.irCods.calibrationStart && this.calibration && !this.poweroff || this._code === this.irCods.calibrationStart_errror && this.calibration && !this.poweroff) {
+  } else if (this._code === this.irCodes.calibrationStart && this.calibration && !this.poweroff || this._code === this.irCodes.calibrationStart_errror && this.calibration && !this.poweroff) {
     this.calibration = false;
     Stop();
   }
-  if (this._code === this.irCods.RedPower && !this.poweroff || this._code === this.irCods.RedPower_error && !this.poweroff) {
+  if (this._code === this.irCodes.RedPower && !this.poweroff || this._code === this.irCodes.RedPower_2 && !this.poweroff) {
     this.g.off();
     this.poweroff = true;
     Stop();
     return;
-  } else if (this._code === this.irCods.RedPower && this.poweroff || this._code === this.irCods.RedPower_error && this.poweroff) {
+  } else if (this._code === this.irCodes.RedPower && this.poweroff || this._code === this.irCodes.RedPower_2 && this.poweroff) {
     this.g.on();
     this.poweroff = false;
     LogoDisplay();
@@ -356,34 +356,34 @@ function SettingsDisplay_2(){
 
 function IrInput() {
 
-  if (this._code === this.irCodsDig._1) {
+  if (this._code === this.irCodesDig._1) {
     this.irDigital = '1';
   }
-  if (this._code === this.irCodsDig._2 || this._code === this.irCodsDig._2_error) {
+  if (this._code === this.irCodesDig._2 || this._code === this.irCodesDig._2_2) {
     this.irDigital = '2';
   }
-  if (this._code === this.irCodsDig._3) {
+  if (this._code === this.irCodesDig._3) {
     this.irDigital = '3';
   }
-  if (this._code === this.irCodsDig._4) {
+  if (this._code === this.irCodesDig._4) {
     this.irDigital = '4';
   }
-  if (this._code === this.irCodsDig._5) {
+  if (this._code === this.irCodesDig._5) {
     this.irDigital = '5';
   }
-  if (this._code === this.irCodsDig._6) {
+  if (this._code === this.irCodesDig._6) {
     this.irDigital = '6';
   }
-  if (this._code === this.irCodsDig._7) {
+  if (this._code === this.irCodesDig._7) {
     this.irDigital = '7';
   }
-  if (this._code === this.irCodsDig._8 || this._code === this.irCodsDig._8_error) {
+  if (this._code === this.irCodesDig._8 || this._code === this.irCodesDig._8_2) {
     this.irDigital = '8';
   }
-  if (this._code === this.irCodsDig._9) {
+  if (this._code === this.irCodesDig._9) {
     this.irDigital = '9';
   }
-  if (this._code === this.irCodsDig._0 || this._code === this.irCodsDig._0_error) {
+  if (this._code === this.irCodesDig._0 || this._code === this.irCodesDig._0_2) {
     this.irDigital = '0';
   }
   if (!this.dispay_2 && this.marker === 0 && this.simNum <= 7 && this.simNum > 0) {
