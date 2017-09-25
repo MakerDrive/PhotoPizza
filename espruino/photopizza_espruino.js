@@ -34,7 +34,7 @@ require("Font8x16").add(Graphics);
 
 this.IRCODES = {};
 this.IRCODES.calibrationStart = 25803148087;
-this.IRCODES.calibrationStart_errror = 6450787021;
+this.IRCODES.calibrationStart_2 = 6450787021;
 
 this.IRCODES.RedPower = 6450774781;
 this.IRCODES.RedPower_2 = 25803099127;
@@ -203,10 +203,10 @@ require("IRReceiver").connect(A0, function(code) {
   }
   if (this._code === this.IRCODES.StepperEn && !this.poweroff) {
   }
-  if (this._code === this.IRCODES.calibrationStart && !this.calibration&& !this.poweroff || this._code === this.IRCODES.calibrationStart_errror && !this.calibration && !this.poweroff) {
+  if (this._code === this.IRCODES.calibrationStart && !this.calibration&& !this.poweroff || this._code === this.IRCODES.calibrationStart_2 && !this.calibration && !this.poweroff) {
     Calibration();
     return;
-  } else if (this._code === this.IRCODES.calibrationStart && this.calibration && !this.poweroff || this._code === this.IRCODES.calibrationStart_errror && this.calibration && !this.poweroff) {
+  } else if (this._code === this.IRCODES.calibrationStart && this.calibration && !this.poweroff || this._code === this.IRCODES.calibrationStart_2 && this.calibration && !this.poweroff) {
     this.calibration = false;
     Stop();
   }
@@ -893,13 +893,6 @@ function Calibration() {
       this.step1 = true;
     }
  }, 1);
-
-  setInterval(function () {
-    this.g.clear();
-    this.g.setFontVector(20);
-    this.g.drawString(this.allSteps + ' st', 0, 0);
-    this.g.flip();
- }, 4999);
 }
 
 this.loadingTimer = setTimeout(function () {
