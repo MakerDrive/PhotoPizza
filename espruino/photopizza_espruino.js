@@ -55,16 +55,23 @@ this.IRCODES.StepperEn = '';
 
 this.IRCODESDIG = {};
 this.IRCODESDIG._1 = 6450803341;
+this.IRCODESDIG._1_2 = 25803213367;
 this.IRCODESDIG._2 = 6450819151;
-this.IRCODESDIG._2_2 = 8888888888888;
+this.IRCODESDIG._2_2 = 25803276607;
 this.IRCODESDIG._3 = 6450786511;
+this.IRCODESDIG._3_3 = 25803146047;
 this.IRCODESDIG._4 = 6450795181;
+this.IRCODESDIG._4_2 = 25803180727;
 this.IRCODESDIG._5 = 6450810991;
+this.IRCODESDIG._5_2 = 25803243967;
 this.IRCODESDIG._6 = 6450778351;
+this.IRCODESDIG._6_2 = 25803113407;
 this.IRCODESDIG._7 = 6450799261;
+this.IRCODESDIG._7_2 = 25803197047;
 this.IRCODESDIG._8 = 6450815071;
 this.IRCODESDIG._8_2 = 25803260287;
 this.IRCODESDIG._9 = 6450782431;
+this.IRCODESDIG._9_2 = 25803129727;
 this.IRCODESDIG._0 = 6450806911;
 this.IRCODESDIG._0_2 = 25803227647;
 
@@ -131,7 +138,7 @@ this.startFlag = false;
 require("IRReceiver").connect(A0, function(code) {
   this._code = parseInt(code, 2);
   
-  if (this.setupMode && this._code === this.IRCODESDIG._1 || this.setupMode && this._code === this.IRCODESDIG._2 || this.setupMode && this._code === this.IRCODESDIG._3 || this.setupMode && this._code === this.IRCODESDIG._4 || this.setupMode && this._code === this.IRCODESDIG._5 || this.setupMode && this._code === this.IRCODESDIG._6 || this.setupMode && this._code === this.IRCODESDIG._7 || this.setupMode && this._code === this.IRCODESDIG._8 || this.setupMode && this._code === this.IRCODESDIG._9 || this.setupMode && this._code === this.IRCODESDIG._0) {
+  if (this.setupMode && this._code === this.IRCODESDIG._1 || this.setupMode && this._code === this.IRCODESDIG._2 || this.setupMode && this._code === this.IRCODESDIG._3 || this.setupMode && this._code === this.IRCODESDIG._4 || this.setupMode && this._code === this.IRCODESDIG._5 || this.setupMode && this._code === this.IRCODESDIG._6 || this.setupMode && this._code === this.IRCODESDIG._7 || this.setupMode && this._code === this.IRCODESDIG._8 || this.setupMode && this._code === this.IRCODESDIG._9 || this.setupMode && this._code === this.IRCODESDIG._0 || this.setupMode && this._code === this.IRCODESDIG._1_2 || this.setupMode && this._code === this.IRCODESDIG._2_2 || this.setupMode && this._code === this.IRCODESDIG._3_2 || this.setupMode && this._code === this.IRCODESDIG._4_2 || this.setupMode && this._code === this.IRCODESDIG._5_2 || this.setupMode && this._code === this.IRCODESDIG._6_2 || this.setupMode && this._code === this.IRCODESDIG._7_2 || this.setupMode && this._code === this.IRCODESDIG._8_2 || this.setupMode && this._code === this.IRCODESDIG._9_2 || this.setupMode && this._code === this.IRCODESDIG._0_2) {
   console.log('input');
     IrInput();
     return;
@@ -367,31 +374,31 @@ function nonstopDisplay(){
 
 function IrInput() {
 
-  if (this._code === this.IRCODESDIG._1) {
+  if (this._code === this.IRCODESDIG._1 || this._code === this.IRCODESDIG._1_2) {
     this.irDigital = '1';
   }
   if (this._code === this.IRCODESDIG._2 || this._code === this.IRCODESDIG._2_2) {
     this.irDigital = '2';
   }
-  if (this._code === this.IRCODESDIG._3) {
+  if (this._code === this.IRCODESDIG._3 || this._code === this.IRCODESDIG._3_2) {
     this.irDigital = '3';
   }
-  if (this._code === this.IRCODESDIG._4) {
+  if (this._code === this.IRCODESDIG._4 || this._code === this.IRCODESDIG._4_2) {
     this.irDigital = '4';
   }
-  if (this._code === this.IRCODESDIG._5) {
+  if (this._code === this.IRCODESDIG._5 || this._code === this.IRCODESDIG._5_2) {
     this.irDigital = '5';
   }
-  if (this._code === this.IRCODESDIG._6) {
+  if (this._code === this.IRCODESDIG._6 || this._code === this.IRCODESDIG._6_2) {
     this.irDigital = '6';
   }
-  if (this._code === this.IRCODESDIG._7) {
+  if (this._code === this.IRCODESDIG._7 || this._code === this.IRCODESDIG._7_2) {
     this.irDigital = '7';
   }
   if (this._code === this.IRCODESDIG._8 || this._code === this.IRCODESDIG._8_2) {
     this.irDigital = '8';
   }
-  if (this._code === this.IRCODESDIG._9) {
+  if (this._code === this.IRCODESDIG._9 || this._code === this.IRCODESDIG._9_2) {
     this.irDigital = '9';
   }
   if (this._code === this.IRCODESDIG._0 || this._code === this.IRCODESDIG._0_2) {
