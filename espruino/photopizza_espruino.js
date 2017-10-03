@@ -84,10 +84,10 @@ this.saved = E.toString(this.f.read(0));
 if (this.saved != 'saved') {
   console.log('start save');
   this.f.write(0, 'saved');
-  this.f.write(1, '16000');//allsteps
-  this.f.write(2, '10');//frame
+  this.f.write(1, '109295');//allsteps
+  this.f.write(2, '36');//frame
   this.f.write(3, '100');//pause
-  this.f.write(4, '100');//shootingTime
+  this.f.write(4, '300');//shootingTime
   this.f.write(5, '5000');//speed
   this.f.write(6, '2000');//acceleration
   this.f.write(7, 'inter');//shootingMode
@@ -636,7 +636,7 @@ function Calibration() {
   digitalWrite(this.pinEn, 0);
   this.step1 = true;
   allSteps = 0;
-  var calibrationSpeed = 1000;
+  var calibrationSpeed = 2000;
   analogWrite(this.pinStep, 0.5, { freq : calibrationSpeed } );
   
   setInterval(function () {
