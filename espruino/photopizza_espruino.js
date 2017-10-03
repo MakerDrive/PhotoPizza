@@ -26,7 +26,7 @@
  *
  */
 
-this.ShowVersion = 'PhotoPizza v3.1';
+this.ShowVersion = 'PhotoPizza v3.1.1';
 
 this.f = new (require("FlashEEPROM"))();
 require("SSD1306");
@@ -529,6 +529,7 @@ function Stop() {
   this.startFlag = false;
   digitalWrite(this.pinStep, 0);
   digitalWrite(pinEn, 1);
+  digitalWrite(this.pinRelay, 0);
   NumControl();
   StartDisplay();
 }
