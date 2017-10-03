@@ -26,7 +26,7 @@
  *
  */
 
-this.ShowVersion = 'PhotoPizza v3.1.1';
+this.ShowVersion = 'PhotoPizza v3.2';
 
 this.f = new (require("FlashEEPROM"))();
 require("SSD1306");
@@ -99,7 +99,7 @@ this.pause = E.toString(this.f.read(3)) * 1;
 this.frameTime = E.toString(this.f.read(4)) * 1;
 this.speed = E.toString(this.f.read(5)) * 1;
 this.acceleration = E.toString(this.f.read(6)) * 1;
-this.shootingMode = E.toString(this.f.read(7));
+this.shootingMode = E.toString(this.f.read(7)) + '';
 
 this.irCode = 0;
 this.irDigital = '1';
@@ -354,6 +354,17 @@ function SettingsDisplay_2(){
   this.g.flip();
 }
 
+function nonstopDisplay(){
+  this.g.clear();
+  this.g.setFontVector(35);
+  this.g.drawString('+', 0, 0);
+  this.g.flip();
+  this.g.setFontBitmap();
+  this.g.setFont8x16();
+  this.g.drawString('NONSTOP', 0, 45);
+  this.g.flip();
+}
+
 function IrInput() {
 
   if (this._code === this.IRCODESDIG._1) {
@@ -494,6 +505,10 @@ function NumControl() {
     this.f.write(5, this.speed + '');
     console.log('save speed');
   }
+  if (E.toString(this.f.read(7)) != this.shootingMode && !this.setupMode) {
+    this.f.write(7, this.shootingMode);
+    console.log('save shootingMode');
+  }
   this._frame = this.frame;
   this._speed = 1;
   this.frameSteps = this.allSteps / this.frame;
@@ -560,6 +575,10 @@ function Stepper() {
     return;
   }
   analogWrite(this.pinStep, 0.5, { freq : this.speed } );
+  if (this.shootingMode === 'nonstop') {
+    nonstopDisplay();
+    return;
+  }
   this.stepTimer = setTimeout(function () {
     clearTimeout(this.stepTimer);
     if (this.accIntervalSteps === 1) {
@@ -636,11 +655,10 @@ function Calibration() {
   digitalWrite(this.pinEn, 0);
   this.step1 = true;
   allSteps = 0;
-  var calibrationSpeed = 2000;
-  analogWrite(this.pinStep, 0.5, { freq : calibrationSpeed } );
+  analogWrite(this.pinStep, 0.5, { freq : this.speed } );
   
   setInterval(function () {
-    this.allSteps = this.allSteps + (calibrationSpeed / 1000);
+    this.allSteps = this.allSteps + (this.speed / 1000);
  }, 1);
 }
 
