@@ -75,16 +75,6 @@ this.IRCODESDIG._9_2 = 25803129727;
 this.IRCODESDIG._0 = 6450806911;
 this.IRCODESDIG._0_2 = 25803227647;
 
-this.right = 1;
-this.left = 0;
-this.direction = 1;
-this.dirDisplay = '';
-if (this.direction === 1) {
-  this.dirDisplay = 'right';
-} else {
-  this.dirDisplay = 'left';
-}
-
 this.saved = E.toString(this.f.read(0));
 
 //MEMORY
@@ -98,6 +88,7 @@ if (this.saved != 'saved') {
   this.f.write(5, '5000');//speed
   this.f.write(6, '2000');//acceleration
   this.f.write(7, 'inter');//shootingMode
+  this.f.write(8, '1');//direction
 }
 
 this.frame = E.toString(this.f.read(2)) * 1;
@@ -107,6 +98,7 @@ this.frameTime = E.toString(this.f.read(4)) * 1;
 this.speed = E.toString(this.f.read(5)) * 1;
 this.acceleration = E.toString(this.f.read(6)) * 1;
 this.shootingMode = E.toString(this.f.read(7)) + '';
+this.direction = E.toString(this.f.read(8)) * 1;
 
 this.irCode = 0;
 this.irDigital = '1';
@@ -117,6 +109,7 @@ this.marker = 0;
 this.indent = 13;
 this.dispay_2 = false;
 this.setupMode = false;
+this.dirDisplay = '';
 
 //STEPPER
 this.pinStep = P11;
@@ -133,7 +126,6 @@ this.relayOn = false;
 
 //FLAGS
 this.startFlag = false;
-
 
 require("IRReceiver").connect(A0, function(code) {
   this._code = parseInt(code, 2);
@@ -318,6 +310,12 @@ function SettingsDisplay_1(){
 }
 
 function SettingsDisplay_2(){
+  if (this.direction === 1) {
+    this.dirDisplay = 'right';
+  } else {
+    this.dirDisplay = 'left';
+  }
+  
   this.setupMode = true;
   this.dispay_2 = true;
 
@@ -343,16 +341,9 @@ function SettingsDisplay_2(){
   this.g.drawString('=', this.nameIndent, 0);
   this.g.drawString(this.shootingMode, 57, 0);
 
-  this.dirDisp = 'left';
-
-  if (this.direction === left) {
-    this.dirDisp = 'left';
-  } else {
-    this.dirDisp = 'Right';
-  }
   this.g.drawString('direc', 8, this.indent);
   this.g.drawString('=', this.nameIndent, this.indent);
-  this.g.drawString(this.dirDisp, 57, this.indent);
+  this.g.drawString(this.dirDisplay, 57, this.indent);
 
   this.g.drawString('steps', 8, this.indent * 2);
   this.g.drawString('=', this.nameIndent, this.indent * 2);
@@ -516,6 +507,11 @@ function NumControl() {
     this.f.write(7, this.shootingMode);
     console.log('save shootingMode');
   }
+  if ((E.toString(this.f.read(8)) * 1) != this.direction + '' && !this.setupMode) {
+    this.f.write(8, this.direction + '');
+    console.log('save direction');
+  }
+  
   this._frame = this.frame;
   this._speed = 1;
   this.frameSteps = this.allSteps / this.frame;
@@ -531,6 +527,9 @@ function NumControl() {
   this.shootingTime1F = this.pause + this.frameTime + this.stepperTime;
   this.shootingTime = this.shootingTime1F * this.frame;
   this._shootingTime = this.shootingTime;
+
+  digitalWrite(this.pinDir, this.direction);
+
   console.log('this.accIntervalSteps = ' + this.accIntervalSteps);
   console.log('NumControl');
 }
