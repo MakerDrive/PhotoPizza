@@ -200,6 +200,29 @@ require("IRReceiver").connect(A0, function(code) {
     this.simNum = 0;
     return;
   }
+
+
+  if (this._code === this.IRCODES.Right_2 && !this.setupMode || this._code === this.IRCODES.Right && !this.setupMode) {
+    digitalWrite(this.pinDir, 1);
+    digitalWrite(this.pinStep, 0);
+    digitalWrite(pinEn, 1);
+    this._speed = 1;
+    infiniteRotation();
+    console.log('Right rotation');
+    return;
+  }
+  if (this._code === this.IRCODES.Left_2 && !this.setupMode || this._code === this.IRCODES.Left && !this.setupMode) {
+    digitalWrite(this.pinDir, 0);
+    digitalWrite(this.pinStep, 0);
+    digitalWrite(pinEn, 1);
+    this._speed = 1;
+    infiniteRotation();
+    console.log('Left rotation');
+    return;
+  }
+
+
+
   if (this._code === this.IRCODES.StepperEn && !this.poweroff) {
   }
   if (this._code === this.IRCODES.calibrationStart && !this.calibration&& !this.poweroff || this._code === this.IRCODES.calibrationStart_2 && !this.calibration && !this.poweroff) {
@@ -651,6 +674,26 @@ function BtnStop() {
       Stop();
 }
 
+function infiniteRotation() {
+
+  this.startFlag = true;
+  this.g.clear();
+  this.g.setFontVector(20);
+  this.g.drawString('infinite', 0, 0);
+  this.g.flip();
+
+  digitalWrite(this.pinEn, 0);
+
+  var accTimerMax = setInterval(function () {
+    analogWrite(this.pinStep, 0.5, { freq : this._speed } );
+    this._speed = this._speed + this.accStep;
+    if (this._speed >= this.speed) {
+      clearInterval(accTimerMax);
+      analogWrite(this.pinStep, 0.5, { freq : this.speed } );
+    }
+  }, this.accSpeed);
+}
+
 function Calibration() {
   this.calibration = true;
   this.g.clear();
@@ -660,7 +703,7 @@ function Calibration() {
 
   digitalWrite(this.pinEn, 0);
   this.step1 = true;
-  allSteps = 0;
+  this.allSteps = 0;
   analogWrite(this.pinStep, 0.5, { freq : this.speed } );
   
   setInterval(function () {
