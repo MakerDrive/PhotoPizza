@@ -147,14 +147,15 @@ require("IRReceiver").connect(A0, function(code) {
     console.log('Setup Exit');
     return;
   }
-  if (this._code === this.IRCODES.Ok && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_2 && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && this.startFlag && !this.poweroff) {
+  if (this._code === this.IRCODES.Ok && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_2 && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok && this.infiniteFlag && !this.poweroff || this._code === this.IRCODES.Ok_2 && this.infiniteFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && this.infiniteFlag && !this.poweroff) {
     this.startFlag = false;
+    this.infiniteFlag = false;
     BtnStop();
     console.log('OK STOP');
     this.simNum = 0;
     return;
   }
-  if (this._code === this.IRCODES.Ok && !this.startFlag && !this.poweroff || this._code === IRCODES.Ok_2 && !this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && !this.poweroff && !this.startFlag) {
+  if (this._code === this.IRCODES.Ok && !this.infiniteFlag && !this.startFlag && !this.poweroff || this._code === IRCODES.Ok_2 && !this.infiniteFlag && !this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && !this.infiniteFlag && !this.poweroff && !this.startFlag) {
     this.startFlag = true;
     StartDisplay();
     Start();
@@ -202,7 +203,7 @@ require("IRReceiver").connect(A0, function(code) {
   }
 
 
-  if (this._code === this.IRCODES.Right_2 && !this.setupMode || this._code === this.IRCODES.Right && !this.setupMode) {
+  if (this._code === this.IRCODES.Right_2 && !this.setupMode && !this.startFlag || this._code === this.IRCODES.Right && !this.setupMode && !this.startFlag) {
     digitalWrite(this.pinDir, 1);
     digitalWrite(this.pinStep, 0);
     digitalWrite(pinEn, 1);
@@ -211,7 +212,8 @@ require("IRReceiver").connect(A0, function(code) {
     console.log('Right rotation');
     return;
   }
-  if (this._code === this.IRCODES.Left_2 && !this.setupMode || this._code === this.IRCODES.Left && !this.setupMode) {
+  if (this._code === this.IRCODES.Left_2 && !this.setupMode && !this.startFlag || this._code === this.IRCODES.Left && !this.setupMode && !this.startFlag) {
+    
     digitalWrite(this.pinDir, 0);
     digitalWrite(this.pinStep, 0);
     digitalWrite(pinEn, 1);
@@ -676,7 +678,7 @@ function BtnStop() {
 
 function infiniteRotation() {
 
-  this.startFlag = true;
+  this.infiniteFlag = true;
   this.g.clear();
   this.g.setFontVector(20);
   this.g.drawString('infinite', 0, 0);
