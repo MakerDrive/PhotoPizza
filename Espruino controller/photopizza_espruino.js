@@ -26,54 +26,11 @@
  *
  */
 
-this.ShowVersion = 'PhotoPizza v3.2';
+this.ShowVersion = 'PhotoPizza v3.4';
 
 this.f = new (require("FlashEEPROM"))();
 require("SSD1306");
 require("Font8x16").add(Graphics);
-
-this.IRCODES = {};
-this.IRCODES.calibrationStart = 25803148087;
-this.IRCODES.calibrationStart_2 = 6450787021;
-
-this.IRCODES.RedPower = 6450774781;
-this.IRCODES.RedPower_2 = 25803099127;
-this.IRCODES.Setup = 6450823741;
-this.IRCODES.Setup_2 = 25803294967;
-this.IRCODES.Up = 6450800791;
-this.IRCODES.Up_2 = 25803203167;
-this.IRCODES.Down = 6450796711;
-this.IRCODES.Down_2 = 25803186847;
-this.IRCODES.Left = 6450809461;
-this.IRCODES.Left_2 = 25803237847;
-this.IRCODES.Right = 6450776821;
-this.IRCODES.Right_2 = 25803107287;
-this.IRCODES.Ok = 6450825271;
-this.IRCODES.Ok_2 = 25803301087;
-this.IRCODES.Ok_3 = '';
-this.IRCODES.StepperEn = '';
-
-this.IRCODESDIG = {};
-this.IRCODESDIG._1 = 6450803341;
-this.IRCODESDIG._1_2 = 25803213367;
-this.IRCODESDIG._2 = 6450819151;
-this.IRCODESDIG._2_2 = 25803276607;
-this.IRCODESDIG._3 = 6450786511;
-this.IRCODESDIG._3_3 = 25803146047;
-this.IRCODESDIG._4 = 6450795181;
-this.IRCODESDIG._4_2 = 25803180727;
-this.IRCODESDIG._5 = 6450810991;
-this.IRCODESDIG._5_2 = 25803243967;
-this.IRCODESDIG._6 = 6450778351;
-this.IRCODESDIG._6_2 = 25803113407;
-this.IRCODESDIG._7 = 6450799261;
-this.IRCODESDIG._7_2 = 25803197047;
-this.IRCODESDIG._8 = 6450815071;
-this.IRCODESDIG._8_2 = 25803260287;
-this.IRCODESDIG._9 = 6450782431;
-this.IRCODESDIG._9_2 = 25803129727;
-this.IRCODESDIG._0 = 6450806911;
-this.IRCODESDIG._0_2 = 25803227647;
 
 this.saved = E.toString(this.f.read(0));
 
@@ -123,31 +80,115 @@ digitalWrite(this.pinDir, this.direction);
 //RELAY
 this.pinRelay = P5;
 this.relayOn = false;
+this.rOn = 1;
+this.rOff = 0;
+digitalWrite(this.pinRelay, this.rOff);
+//P8.mode('analog');
 
 //FLAGS
 this.startFlag = false;
 
 require("IRReceiver").connect(A0, function(code) {
-  this._code = parseInt(code, 2);
+  var _code = parseInt(code, 2);
+  var btn = '';
+
+  if (_code === 6450803341 || _code === 25803213367) {
+    btn = 1;
+    console.log(btn);
+  }
+  if (_code === 6450819151 || _code === 25803276607) {
+    btn = 2;
+    console.log(btn);
+  }
+  if (_code === 6450786511 || _code === 25803146047) {
+    btn = 3;
+    console.log(btn);
+  }
+  if (_code === 6450795181 || _code === 25803180727) {
+    btn = 4;
+    console.log(btn);
+  }
+  if (_code === 6450810991 || _code === 25803243967) {
+    btn = 5;
+    console.log(btn);
+  }
+  if (_code === 6450778351 || _code === 25803113407) {
+    btn = 6;
+    console.log(btn);
+  }
+  if (_code === 6450799261 || _code === 25803197047) {
+    btn = 7;
+    console.log(btn);
+  }
+  if (_code === 6450815071 || _code === 25803260287) {
+    btn = 8;
+    console.log(btn);
+  }
+  if (_code === 6450782431 || _code === 25803129727) {
+    btn = 9;
+    console.log(btn);
+  }
+  if (_code === 6450806911 || _code === 25803227647) {
+    btn = 0;
+    console.log(btn);
+  }
+
+  if (_code === 25803148087 || _code === 6450787021) {
+    btn = 'CALIBR';
+    console.log(btn);
+  }
+  if (_code === 6450774781 || _code === 25803099127) {
+    btn = 'R POWER';
+    console.log(btn);
+  }
+  if (_code === 6450823741 || _code === 25803294967) {
+    btn = 'SETUP';
+    console.log(btn);
+  }
+  if (_code === 6450800791 || _code === 25803203167) {
+    btn = 'UP';
+    console.log(btn);
+  }
+  if (_code === 6450796711 || _code === 25803186847) {
+    btn = 'DOWN';
+    console.log(btn);
+  }
+  if (_code === 6450809461 || _code === 25803237847) {
+    btn = 'LEFT';
+    console.log(btn);
+  }
+  if (_code === 6450776821 || _code === 25803107287) {
+    btn = 'RIGHT';
+    console.log(btn);
+  }
+  if (_code === 6450825271 || _code === 25803301087) {
+    btn = 'OK';
+    console.log(btn);
+  }
+  if (_code === 6450813031 || _code === 25803252127) {
+    btn = '90DEG';
+    console.log(btn);
+  }
+  console.log(_code);
   
-  if (this.setupMode && this._code === this.IRCODESDIG._1 || this.setupMode && this._code === this.IRCODESDIG._2 || this.setupMode && this._code === this.IRCODESDIG._3 || this.setupMode && this._code === this.IRCODESDIG._4 || this.setupMode && this._code === this.IRCODESDIG._5 || this.setupMode && this._code === this.IRCODESDIG._6 || this.setupMode && this._code === this.IRCODESDIG._7 || this.setupMode && this._code === this.IRCODESDIG._8 || this.setupMode && this._code === this.IRCODESDIG._9 || this.setupMode && this._code === this.IRCODESDIG._0 || this.setupMode && this._code === this.IRCODESDIG._1_2 || this.setupMode && this._code === this.IRCODESDIG._2_2 || this.setupMode && this._code === this.IRCODESDIG._3_2 || this.setupMode && this._code === this.IRCODESDIG._4_2 || this.setupMode && this._code === this.IRCODESDIG._5_2 || this.setupMode && this._code === this.IRCODESDIG._6_2 || this.setupMode && this._code === this.IRCODESDIG._7_2 || this.setupMode && this._code === this.IRCODESDIG._8_2 || this.setupMode && this._code === this.IRCODESDIG._9_2 || this.setupMode && this._code === this.IRCODESDIG._0_2) {
+  if (this.setupMode && btn === 1 || this.setupMode && btn === 2 || this.setupMode && btn === 3 || this.setupMode && btn === 4 || this.setupMode && btn === 5 || this.setupMode && btn === 6 || this.setupMode && btn === 7 || this.setupMode && btn === 8 || this.setupMode && btn === 9 || this.setupMode && btn === 0) {
   console.log('input');
-    IrInput();
+    IrInput(btn);
     return;
   }
-  if (this._code === this.IRCODES.Setup && !this.setupMode && !this.poweroff || this._code === this.IRCODES.Setup_2 && !this.setupMode && !this.poweroff) {
+  if (btn === 'SETUP' && !this.setupMode && !this.poweroff) {
     SettingsDisplay_1();
     console.log('Setup');
     this.simNum = 0;
     return;
-  } else if (this._code === this.IRCODES.Setup && this.setupMode || this._code === this.IRCODES.Setup_2 && this.setupMode) {
+  } else if (btn === 'SETUP' && this.setupMode) {
     this.setupMode = false;
     NumControl();
     StartDisplay();
     console.log('Setup Exit');
     return;
   }
-  if (this._code === this.IRCODES.Ok && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_2 && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok && this.infiniteFlag && !this.poweroff || this._code === this.IRCODES.Ok_2 && this.infiniteFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && this.infiniteFlag && !this.poweroff) {
+  if (btn === 'OK' && this.startFlag && !this.poweroff || btn === 'OK' && this.infiniteFlag && !this.poweroff) {
     this.startFlag = false;
     this.infiniteFlag = false;
     BtnStop();
@@ -155,7 +196,7 @@ require("IRReceiver").connect(A0, function(code) {
     this.simNum = 0;
     return;
   }
-  if (this._code === this.IRCODES.Ok && !this.infiniteFlag && !this.startFlag && !this.poweroff || this._code === IRCODES.Ok_2 && !this.infiniteFlag && !this.startFlag && !this.poweroff || this._code === this.IRCODES.Ok_3 && !this.infiniteFlag && !this.poweroff && !this.startFlag) {
+  if (btn === 'OK' && !this.infiniteFlag && !this.startFlag && !this.poweroff) {
     this.startFlag = true;
     StartDisplay();
     Start();
@@ -163,47 +204,45 @@ require("IRReceiver").connect(A0, function(code) {
     this.simNum = 0;
     return;
   }
-  if (this._code === this.IRCODES.Down && !this.dispay_2 && this.setupMode || this._code === this.IRCODES.Down_2 && !this.dispay_2 && this.setupMode) {
+  if (btn === 'DOWN' && !this.dispay_2 && this.setupMode) {
     this.marker = this.marker + this.indent;
     SettingsDisplay_1();
     this.simNum = 0;
     console.log('Down D1');
     return;
-  } else if (this._code === this.IRCODES.Down && this.dispay_2 && this.setupMode || this._code === this.IRCODES.Down_2 && this.dispay_2 && this.setupMode) {
+  } else if (btn === 'DOWN' && this.dispay_2 && this.setupMode) {
     this.marker = this.marker + this.indent;
     SettingsDisplay_2();
     console.log('Down D2');
     this.simNum = 0;
     return;
   }
-   if (this._code === this.IRCODES.Up && !this.dispay_2 && this.setupMode || this._code === this.IRCODES.Up_2 && !this.dispay_2 && this.setupMode) {
+   if (btn === 'UP' && !this.dispay_2 && this.setupMode) {
     this.marker = this.marker - this.indent;
     SettingsDisplay_1();
     this.simNum = 0;
     console.log('UP D1');
     return;
-  } else if (this._code === this.IRCODES.Up && this.dispay_2 && this.setupMode || this._code === this.IRCODES.Up_2 && this.dispay_2 && this.setupMode) {
+  } else if (btn === 'UP' && this.dispay_2 && this.setupMode) {
     this.marker = this.marker - this.indent;
     SettingsDisplay_2();
     console.log('UP D2');
     this.simNum = 0;
     return;
   }
-  if (this._code === this.IRCODES.Right_2 && !this.dispay_2 && this.setupMode || this._code === this.IRCODES.Right && !this.dispay_2 && this.setupMode) {
+  if (btn === 'RIGHT' && !this.dispay_2 && this.setupMode) {
     SettingsDisplay_2();
     console.log('Right');
     this.simNum = 0;
     return;
   }
-  if (this._code === this.IRCODES.Left_2 && this.dispay_2 && this.setupMode || this._code === this.IRCODES.Left && this.dispay_2 && this.setupMode) {
+  if (btn === 'LEFT' && this.dispay_2 && this.setupMode) {
     SettingsDisplay_1();
     console.log('Left');
     this.simNum = 0;
     return;
   }
-
-
-  if (this._code === this.IRCODES.Right_2 && !this.setupMode && !this.startFlag || this._code === this.IRCODES.Right && !this.setupMode && !this.startFlag) {
+  if (btn === 'RIGHT' && !this.setupMode && !this.startFlag) {
     digitalWrite(this.pinDir, 1);
     digitalWrite(this.pinStep, 0);
     digitalWrite(pinEn, 1);
@@ -212,8 +251,7 @@ require("IRReceiver").connect(A0, function(code) {
     console.log('Right rotation');
     return;
   }
-  if (this._code === this.IRCODES.Left_2 && !this.setupMode && !this.startFlag || this._code === this.IRCODES.Left && !this.setupMode && !this.startFlag) {
-    
+  if (btn === 'LEFT' && !this.setupMode && !this.startFlag) {
     digitalWrite(this.pinDir, 0);
     digitalWrite(this.pinStep, 0);
     digitalWrite(pinEn, 1);
@@ -222,30 +260,33 @@ require("IRReceiver").connect(A0, function(code) {
     console.log('Left rotation');
     return;
   }
-
-
-
-  if (this._code === this.IRCODES.StepperEn && !this.poweroff) {
-  }
-  if (this._code === this.IRCODES.calibrationStart && !this.calibration&& !this.poweroff || this._code === this.IRCODES.calibrationStart_2 && !this.calibration && !this.poweroff) {
+  if (btn === 'CALIBR' && !this.calibration && !this.poweroff) {
     Calibration();
     return;
-  } else if (this._code === this.IRCODES.calibrationStart && this.calibration && !this.poweroff || this._code === this.IRCODES.calibrationStart_2 && this.calibration && !this.poweroff) {
+  } else if (btn === 'CALIBR' && this.calibration && !this.poweroff) {
     this.calibration = false;
     Stop();
   }
-  if (this._code === this.IRCODES.RedPower && !this.poweroff || this._code === this.IRCODES.RedPower_2 && !this.poweroff) {
+  this.deg90flag = false;
+  if (btn === '90DEG' && !this.calibration && !this.poweroff && !this.deg90flag) {
+    this.deg90flag = true;
+    deg90();
+    return;
+  } else if (btn === '90DEG' && this.calibration && !this.poweroff) {
+    this.deg90flag = false;
+    Stop();
+  }
+  if (btn === 'R POWER' && !this.poweroff) {
     this.g.off();
     this.poweroff = true;
     Stop();
     return;
-  } else if (this._code === this.IRCODES.RedPower && this.poweroff || this._code === this.IRCODES.RedPower_2 && this.poweroff) {
+  } else if (btn === 'R POWER' && this.poweroff) {
     this.g.on();
     this.poweroff = false;
     LogoDisplay();
     return;
   }
-  console.log(this._code);
 });
 
 function LogoDisplay(){
@@ -377,49 +418,10 @@ function SettingsDisplay_2(){
   this.g.flip();
 }
 
-function nonstopDisplay(){
-  this.g.clear();
-  this.g.setFontVector(35);
-  this.g.drawString('+', 0, 0);
-  this.g.flip();
-  this.g.setFontBitmap();
-  this.g.setFont8x16();
-  this.g.drawString('NONSTOP', 0, 45);
-  this.g.flip();
-}
+function IrInput(btn) {
 
-function IrInput() {
+  this.irDigital = btn + '';
 
-  if (this._code === this.IRCODESDIG._1 || this._code === this.IRCODESDIG._1_2) {
-    this.irDigital = '1';
-  }
-  if (this._code === this.IRCODESDIG._2 || this._code === this.IRCODESDIG._2_2) {
-    this.irDigital = '2';
-  }
-  if (this._code === this.IRCODESDIG._3 || this._code === this.IRCODESDIG._3_2) {
-    this.irDigital = '3';
-  }
-  if (this._code === this.IRCODESDIG._4 || this._code === this.IRCODESDIG._4_2) {
-    this.irDigital = '4';
-  }
-  if (this._code === this.IRCODESDIG._5 || this._code === this.IRCODESDIG._5_2) {
-    this.irDigital = '5';
-  }
-  if (this._code === this.IRCODESDIG._6 || this._code === this.IRCODESDIG._6_2) {
-    this.irDigital = '6';
-  }
-  if (this._code === this.IRCODESDIG._7 || this._code === this.IRCODESDIG._7_2) {
-    this.irDigital = '7';
-  }
-  if (this._code === this.IRCODESDIG._8 || this._code === this.IRCODESDIG._8_2) {
-    this.irDigital = '8';
-  }
-  if (this._code === this.IRCODESDIG._9 || this._code === this.IRCODESDIG._9_2) {
-    this.irDigital = '9';
-  }
-  if (this._code === this.IRCODESDIG._0 || this._code === this.IRCODESDIG._0_2) {
-    this.irDigital = '0';
-  }
   if (!this.dispay_2 && this.marker === 0 && this.simNum <= 7 && this.simNum > 0) {
     this.frame = (this.frame + this.irDigital) * 1;
     NumControl();
@@ -485,11 +487,11 @@ function IrInput() {
     SettingsDisplay_2();
   }
   if (this.dispay_2 && this.marker === 0 && this.irDigital === '2') {
-    this.shootingMode = 'nonstop';
+    this.shootingMode = 'seria';
     SettingsDisplay_2();
   }
   if (this.dispay_2 && this.marker === 0 && this.irDigital === '3') {
-    this.shootingMode = 'stopmo';
+    this.shootingMode = 'nonST';
     SettingsDisplay_2();
   }
    if (this.dispay_2 && this.marker === this.indent && this.irDigital === '1') {
@@ -552,7 +554,7 @@ function NumControl() {
   this.shootingTime1F = this.pause + this.frameTime + this.stepperTime;
   this.shootingTime = this.shootingTime1F * this.frame;
   this._shootingTime = this.shootingTime;
-
+  this.nonStopTimerSpeed = this.stepperTime;
   digitalWrite(this.pinDir, this.direction);
 
   console.log('this.accIntervalSteps = ' + this.accIntervalSteps);
@@ -561,6 +563,11 @@ function NumControl() {
 
 function Start() {
   digitalWrite(pinEn, 0);
+  if (this.shootingMode === 'nonST') {
+    this.startFlag = true;
+    nonStop();
+    return;
+  }
   if (this._frame > 0) {
     this.startFlag = true;
     ShotingPause();
@@ -575,7 +582,8 @@ function Stop() {
   this.startFlag = false;
   digitalWrite(this.pinStep, 0);
   digitalWrite(pinEn, 1);
-  digitalWrite(this.pinRelay, 0);
+  digitalWrite(this.pinRelay, this.rOff);
+  //P8.mode('analog');
   NumControl();
   StartDisplay();
 }
@@ -597,8 +605,43 @@ function StepperAccMax() {
     if (this._speed >= this.speed) {
       clearInterval(accTimerMax);
       Stepper();
+      return;
     }
   }, this.accSpeed);
+}
+
+function nonStop() {
+  if (!this.startFlag) {
+    return;
+  }
+  shot();
+  this._frame--;
+  StartDisplay();
+  analogWrite(this.pinStep, 0.5, { freq : this.speed } );
+  var nonStopInterval = setInterval(function () {
+    if (this._frame <= 0) {
+      clearInterval(nonStopInterval);
+      Stop();
+      return;
+    }
+    shot();
+    this._frame--;
+    StartDisplay();
+  }, this.nonStopTimerSpeed);
+}
+
+function shot() {
+  if (!this.startFlag) {
+    return;
+  }
+  console.log('shot');
+  digitalWrite(this.pinRelay, this.rOn);
+  this.relayOn = true;
+  this.shotTimer = setTimeout(function () {
+    digitalWrite(this.pinRelay, this.rOff);
+    this.relayOn = false;
+    clearTimeout(this.shotTimer);
+  }, 100);
 }
 
 function Stepper() {
@@ -606,10 +649,7 @@ function Stepper() {
     return;
   }
   analogWrite(this.pinStep, 0.5, { freq : this.speed } );
-  if (this.shootingMode === 'nonstop') {
-    nonstopDisplay();
-    return;
-  }
+  
   this.stepTimer = setTimeout(function () {
     clearTimeout(this.stepTimer);
     if (this.accIntervalSteps === 1) {
@@ -657,10 +697,12 @@ function Relay() {
 
   if (this._frame > 0 && this.startFlag) {
     this.relayOn = true;
-    digitalWrite(this.pinRelay, 1);
+    digitalWrite(this.pinRelay, this.rOn);
+    //P8.mode('output');
     this._frame--;
     this.frameTimer = setTimeout(function () {
-      digitalWrite(this.pinRelay, 0);
+      digitalWrite(this.pinRelay, this.rOff);
+      //P8.mode('analog');
       this.relayOn = false;
       StartDisplay();
       StepperAccMax();
@@ -694,6 +736,24 @@ function infiniteRotation() {
       analogWrite(this.pinStep, 0.5, { freq : this.speed } );
     }
   }, this.accSpeed);
+}
+
+function deg90() {
+  this.g.clear();
+  this.g.setFontVector(20);
+  this.g.drawString('turn to 90', 0, 0);
+  this.g.flip();
+
+  digitalWrite(this.pinEn, 0);
+  analogWrite(this.pinStep, 0.5, { freq : this.speed } );
+  var turn = 0;
+  setInterval(function () {
+    if (turn >= this.allSteps / 4) {
+      Stop();
+      this.deg90flag = false;
+    }
+    turn = turn + (this.speed / 1000);
+ }, 1);
 }
 
 function Calibration() {
