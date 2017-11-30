@@ -79,12 +79,10 @@ digitalWrite(this.pinDir, this.direction);
 
 //RELAY
 this.pinRelay = P5;
-this.pinLaser = P6;
 this.relayOn = false;
-this.rOn = 0;
-this.rOff = 1;
+this.rOn = 1;
+this.rOff = 0;
 digitalWrite(this.pinRelay, this.rOff);
-digitalWrite(this.pinLaser, this.rOn);
 //P8.mode('analog');
 
 //FLAGS
@@ -540,32 +538,35 @@ function NumControl() {
     this.f.write(8, this.direction + '');
     console.log('save direction');
   }
+  if ((E.toString(this.f.read(6)) * 1) != this.acceleration + '' && !this.setupMode) {
+    this.f.write(6, this.acceleration + '');
+    console.log('save acceleration');
+  }
   
   this._frame = this.frame;
   this._speed = 1;
   this.frameSteps = this.allSteps / this.frame;
   this.stepperTime = this.frameSteps / this.speed * 1000;
   this.accelerationSteps = this.frameSteps / 4;
-  this.accelerationTime = this.stepperTime / 4; 
-  this.accIntervalSteps = Math.floor(0.04 * this.accelerationSteps);
-  if (this.accIntervalSteps <= 0) {
-    this.accIntervalSteps = 1;
-  }
-  this.accStep = this.speed / this.accIntervalSteps;
-  this.accSpeed = this.accelerationTime / this.accIntervalSteps;
+  this.accelerationTime = (this.stepperTime / 4) * 2; 
+  
+  this.accSpeed = 10;
   this.shootingTime1F = this.pause + this.frameTime + this.stepperTime;
   this.shootingTime = this.shootingTime1F * this.frame;
   this._shootingTime = this.shootingTime;
   this.nonStopTimerSpeed = this.stepperTime;
+
+  this.accStep = this.accelerationSteps / (this.accelerationTime / this.accSpeed);
+  console.log('this.accStep= ' + this.accStep);
+
   digitalWrite(this.pinDir, this.direction);
 
-  console.log('this.accIntervalSteps = ' + this.accIntervalSteps);
   console.log('NumControl');
 }
 
 function Start() {
+  console.log(this._frame);
   digitalWrite(pinEn, 0);
-  digitalWrite(this.pinLaser, this.rOff);
   if (this.shootingMode === 'nonST') {
     this.startFlag = true;
     nonStop();
@@ -586,7 +587,6 @@ function Stop() {
   digitalWrite(this.pinStep, 0);
   digitalWrite(pinEn, 1);
   digitalWrite(this.pinRelay, this.rOff);
-  digitalWrite(this.pinLaser, this.rOn);
   //P8.mode('analog');
   NumControl();
   StartDisplay();
@@ -597,20 +597,19 @@ function StepperAccMax() {
     return;
   }
   this._speed = 1;
-  if (this.accIntervalSteps === 1) {
-    this._speed = this.speed;
-    this.accelerationTime = this.stepperTime / 3;
-    Stepper();
-    return;
-  }
+  var totalSteps = 0;
+
   var accTimerMax = setInterval(function () {
-    analogWrite(this.pinStep, 0.5, { freq : this._speed } );
-    this._speed = this._speed + this.accStep;
-    if (this._speed >= this.speed) {
+    analogWrite(this.pinStep, 0.5, { freq: this._speed } );
+    this._speed += this.accStep;
+    var iterationSteps = (this.accSpeed / 1000) * this._speed;
+    
+    if (totalSteps >= this.accelerationSteps) {
       clearInterval(accTimerMax);
       Stepper();
       return;
     }
+    totalSteps += iterationSteps;
   }, this.accSpeed);
 }
 
@@ -656,29 +655,27 @@ function Stepper() {
   
   this.stepTimer = setTimeout(function () {
     clearTimeout(this.stepTimer);
-    if (this.accIntervalSteps === 1) {
-      this._shootingTime = this._shootingTime - this.shootingTime1F;
-      digitalWrite(this.pinStep, 0);
-      Start();
-      return;
-    }
     StepperAccMin();
-  }, this.accelerationTime * 3);
+  }, this.stepperTime / 2);
 }
 
 function StepperAccMin() {
   if (!this.startFlag) {
     return;
   }
-  analogWrite(this.pinStep, 0.5, { freq : this.speed } );
+  this._speed = this.speed;
+  var totalSteps = 0;
+
   var accTimerMin = setInterval(function () {
-    analogWrite(this.pinStep, 0.5, { freq : this._speed } );
-    this._speed = this._speed - this.accStep;
-    if (this._speed <= 0) {
+    analogWrite(this.pinStep, 0.5, { freq: this._speed } );
+    this._speed -= this.accStep;
+    var iterationSteps = (this.accSpeed / 1000) * this._speed;
+    if (totalSteps >= this.accelerationSteps || iterationSteps <= 10) {
       clearInterval(accTimerMin);
       this._shootingTime = this._shootingTime - this.shootingTime1F;
       Start();
     }
+    totalSteps += iterationSteps;
   }, this.accSpeed);
 }
 
@@ -734,7 +731,7 @@ function infiniteRotation() {
 
   var accTimerMax = setInterval(function () {
     analogWrite(this.pinStep, 0.5, { freq : this._speed } );
-    this._speed = this._speed + this.accStep;
+    this._speed = this._speed + this.acceleration;
     if (this._speed >= this.speed) {
       clearInterval(accTimerMax);
       analogWrite(this.pinStep, 0.5, { freq : this.speed } );
