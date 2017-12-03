@@ -494,6 +494,10 @@ function IrInput(btn) {
     this.shootingMode = 'nonST';
     SettingsDisplay_2();
   }
+  if (this.dispay_2 && this.marker === 0 && this.irDigital === '4') {
+    this.shootingMode = 'PingP';
+    SettingsDisplay_2();
+  }
    if (this.dispay_2 && this.marker === this.indent && this.irDigital === '1') {
     this.direction = 1;
     SettingsDisplay_2();

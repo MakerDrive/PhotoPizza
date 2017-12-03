@@ -26,7 +26,7 @@
  *
  */
 
-this.ShowVersion = 'PhotoPizza v3.4';
+this.ShowVersion = 'PhotoPizza v3.5';
 
 this.f = new (require("FlashEEPROM"))();
 require("SSD1306");
@@ -282,11 +282,13 @@ require("IRReceiver").connect(A0, function(code) {
     this.g.off();
     this.poweroff = true;
     Stop();
+    digitalWrite(this.pinLaser, this.rOff);
     return;
   } else if (btn === 'R POWER' && this.poweroff) {
     this.g.on();
     this.poweroff = false;
     LogoDisplay();
+    digitalWrite(this.pinLaser, this.rOn);
     return;
   }
 });
@@ -496,6 +498,10 @@ function IrInput(btn) {
     this.shootingMode = 'nonST';
     SettingsDisplay_2();
   }
+  if (this.dispay_2 && this.marker === 0 && this.irDigital === '4') {
+    this.shootingMode = 'PingP';
+    SettingsDisplay_2();
+  }
    if (this.dispay_2 && this.marker === this.indent && this.irDigital === '1') {
     this.direction = 1;
     SettingsDisplay_2();
@@ -618,6 +624,7 @@ function nonStop() {
   if (!this.startFlag) {
     return;
   }
+  digitalWrite(this.pinLaser, this.rOff);
   shot();
   this._frame--;
   StartDisplay();
@@ -674,6 +681,19 @@ function StepperAccMin() {
   var accTimerMin = setInterval(function () {
     analogWrite(this.pinStep, 0.5, { freq : this._speed } );
     this._speed = this._speed - this.accStep;
+    if (this.shootingMode === 'PingP' && this._speed <= 0 && this.direction === 1) {
+      clearInterval(accTimerMin);
+      this.direction = 0;
+      digitalWrite(this.pinDir, this.direction);
+      StepperAccMax();
+      return;
+    } else if (this.shootingMode === 'PingP' && this._speed <= 0 && this.direction === 0) {
+      clearInterval(accTimerMin);
+      this.direction = 1
+      digitalWrite(this.pinDir, this.direction);;
+      StepperAccMax();
+      return;
+    }
     if (this._speed <= 0) {
       clearInterval(accTimerMin);
       this._shootingTime = this._shootingTime - this.shootingTime1F;
@@ -723,7 +743,7 @@ function BtnStop() {
 }
 
 function infiniteRotation() {
-
+  digitalWrite(this.pinLaser, this.rOff);
   this.infiniteFlag = true;
   this.g.clear();
   this.g.setFontVector(20);
