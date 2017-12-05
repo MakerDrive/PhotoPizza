@@ -29,7 +29,7 @@
 this.ShowVersion = 'PhotoPizza v3.5';
 
 this.f = new (require("FlashEEPROM"))();
-require("SSD1306");
+//require("SSD1306");
 require("Font8x16").add(Graphics);
 
 this.saved = E.toString(this.f.read(0));
@@ -81,8 +81,8 @@ digitalWrite(this.pinDir, this.direction);
 this.pinRelay = P5;
 this.pinLaser = P6;
 this.relayOn = false;
-this.rOn = 0;
-this.rOff = 1;
+this.rOn = 1;
+this.rOff = 0;
 digitalWrite(this.pinRelay, this.rOff);
 digitalWrite(this.pinLaser, this.rOn);
 //P8.mode('analog');
