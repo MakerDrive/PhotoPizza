@@ -29,7 +29,7 @@
 this.ShowVersion = 'PhotoPizza v3.5';
 
 this.f = new (require("FlashEEPROM"))();
-//require("SSD1306");
+
 require("Font8x16").add(Graphics);
 
 this.saved = E.toString(this.f.read(0));
@@ -70,11 +70,13 @@ this.dirDisplay = '';
 
 //STEPPER
 this.pinStep = P9;
-this.pinEn = P12;
+var pinEn = P12;
 this.pinDir = P10;
+var stOn = 0;
+var stOff = 1;
 
 digitalWrite(this.pinStep, 0);
-digitalWrite(this.pinEn, 1);
+digitalWrite(pinEn, stOff);
 digitalWrite(this.pinDir, this.direction);
 
 //RELAY
@@ -247,7 +249,7 @@ require("IRReceiver").connect(A0, function(code) {
   if (btn === 'RIGHT' && !this.setupMode && !this.startFlag) {
     digitalWrite(this.pinDir, 1);
     digitalWrite(this.pinStep, 0);
-    digitalWrite(pinEn, 1);
+    digitalWrite(pinEn, stOn);
     this._speed = 1;
     infiniteRotation();
     console.log('Right rotation');
@@ -256,7 +258,7 @@ require("IRReceiver").connect(A0, function(code) {
   if (btn === 'LEFT' && !this.setupMode && !this.startFlag) {
     digitalWrite(this.pinDir, 0);
     digitalWrite(this.pinStep, 0);
-    digitalWrite(pinEn, 1);
+    digitalWrite(pinEn, stOn);
     this._speed = 1;
     infiniteRotation();
     console.log('Left rotation');
@@ -279,13 +281,13 @@ require("IRReceiver").connect(A0, function(code) {
     Stop();
   }
   if (btn === 'R POWER' && !this.poweroff) {
-    this.g.off();
+    g.off();
     this.poweroff = true;
     Stop();
     digitalWrite(this.pinLaser, this.rOff);
     return;
   } else if (btn === 'R POWER' && this.poweroff) {
-    this.g.on();
+    g.on();
     this.poweroff = false;
     LogoDisplay();
     digitalWrite(this.pinLaser, this.rOn);
@@ -294,27 +296,27 @@ require("IRReceiver").connect(A0, function(code) {
 });
 
 function LogoDisplay(){
-  
+ 
   var x1x2 = 1;
-  this.g.clear();
-  this.g.setFontBitmap();
-  this.g.setFont8x16();
-  this.g.drawString(this.ShowVersion, 10, 45);
-  this.g.flip();
+  g.clear();
+  g.setFontBitmap();
+  g.setFont8x16();
+  g.drawString(this.ShowVersion, 10, 45);
+  g.flip();
   var preloader = setInterval(function () {
-    this.g.drawLine(x1x2, 20, x1x2, 30);
+    g.drawLine(x1x2, 20, x1x2, 30);
     x1x2 += 2;
-    this.g.drawLine(x1x2, 20, x1x2, 30);
+    g.drawLine(x1x2, 20, x1x2, 30);
     x1x2 += 2;
-    this.g.drawLine(x1x2, 20, x1x2, 30);
+    g.drawLine(x1x2, 20, x1x2, 30);
     x1x2 += 2;
-    this.g.drawLine(x1x2, 20, x1x2, 30);
+    g.drawLine(x1x2, 20, x1x2, 30);
     x1x2 += 2;
-    this.g.drawLine(x1x2, 20, x1x2, 30);
+    g.drawLine(x1x2, 20, x1x2, 30);
     x1x2 += 2;
-    this.g.drawLine(x1x2, 20, x1x2, 30);
+    g.drawLine(x1x2, 20, x1x2, 30);
     x1x2 += 2;
-    this.g.flip();
+    g.flip();
     if (x1x2 > 126) {
       clearInterval(preloader);
       NumControl();
@@ -324,17 +326,19 @@ function LogoDisplay(){
 }
 
 function StartDisplay(){
-  this.g.clear();
-  this.g.setFontVector(35);
-  this.g.drawString(this._frame + ' f', 0, 0);
-  this.g.flip();
-  this.g.setFontBitmap();
-  this.g.setFont8x16();
-  this.g.drawString(Math.floor(this._shootingTime / 1000) + ' SECONDS', 0, 45);
-  this.g.flip();
+
+  g.clear();
+  g.setFontVector(35);
+  g.drawString(this._frame + ' f', 0, 0);
+  g.flip();
+  g.setFontBitmap();
+  g.setFont8x16();
+  g.drawString(Math.floor(this._shootingTime / 1000) + ' SECONDS', 0, 45);
+  g.flip();
 }
 
 function SettingsDisplay_1(){
+
   this.setupMode = true;
   this.dispay_2 = false;
 
@@ -344,42 +348,43 @@ function SettingsDisplay_1(){
     this.marker = this.indent * 4;
   }
 
-  this.g.clear();
+  g.clear();
 
-  this.g.setFontBitmap();
-  this.g.setFont8x16();
-  this.g.drawString('>', 1, this.marker);
-  this.g.drawString('>', 117, 28);
-  this.g.drawString('1', 117, 0);
+  g.setFontBitmap();
+  g.setFont8x16();
+  g.drawString('>', 1, this.marker);
+  g.drawString('>', 117, 28);
+  g.drawString('1', 117, 0);
 
-  this.g.drawLine(112, 0, 112, 127);
+  g.drawLine(112, 0, 112, 127);
 
   this.nameIndent = 48;
 
-  this.g.drawString('frame', 8, 0);
-  this.g.drawString('=', this.nameIndent, 0);
-  this.g.drawString(this.frame, 57, 0);
+  g.drawString('frame', 8, 0);
+  g.drawString('=', this.nameIndent, 0);
+  g.drawString(this.frame, 57, 0);
 
-  this.g.drawString('delay', 8, this.indent);
-  this.g.drawString('=', this.nameIndent, this.indent);
-  this.g.drawString(this.frameTime, 57, this.indent);
+  g.drawString('delay', 8, this.indent);
+  g.drawString('=', this.nameIndent, this.indent);
+  g.drawString(this.frameTime, 57, this.indent);
 
-  this.g.drawString('pause', 8, this.indent * 2);
-  this.g.drawString('=', this.nameIndent, this.indent * 2);
-  this.g.drawString(this.pause, 57, this.indent * 2);
+  g.drawString('pause', 8, this.indent * 2);
+  g.drawString('=', this.nameIndent, this.indent * 2);
+  g.drawString(this.pause, 57, this.indent * 2);
 
-  this.g.drawString('speed', 8, this.indent * 3);
-  this.g.drawString('=', this.nameIndent, this.indent * 3);
-  this.g.drawString(this.speed, 57, this.indent * 3);
+  g.drawString('speed', 8, this.indent * 3);
+  g.drawString('=', this.nameIndent, this.indent * 3);
+  g.drawString(this.speed, 57, this.indent * 3);
 
-  this.g.drawString('accel', 8, this.indent * 4);
-  this.g.drawString('=', this.nameIndent, this.indent * 4);
-  this.g.drawString(this.acceleration, 57, this.indent * 4);
+  g.drawString('accel', 8, this.indent * 4);
+  g.drawString('=', this.nameIndent, this.indent * 4);
+  g.drawString(this.acceleration, 57, this.indent * 4);
 
-  this.g.flip();
+  g.flip();
 }
 
 function SettingsDisplay_2(){
+
   if (this.direction === 1) {
     this.dirDisplay = 'right';
   } else {
@@ -395,31 +400,31 @@ function SettingsDisplay_2(){
     this.marker = this.indent * 2;
   }
 
-  this.g.clear();
+  g.clear();
 
-  this.g.setFontBitmap();
-  this.g.setFont8x16();
-  this.g.drawString('>', 1, this.marker);
-  this.g.drawString('<', 117, 28);
-  this.g.drawString('2', 117, 0);
+  g.setFontBitmap();
+  g.setFont8x16();
+  g.drawString('>', 1, this.marker);
+  g.drawString('<', 117, 28);
+  g.drawString('2', 117, 0);
 
-  this.g.drawLine(112, 0, 112, 127);
+  g.drawLine(112, 0, 112, 127);
 
   this.nameIndent = 48;
 
-  this.g.drawString('mode', 8, 0);
-  this.g.drawString('=', this.nameIndent, 0);
-  this.g.drawString(this.shootingMode, 57, 0);
+  g.drawString('mode', 8, 0);
+  g.drawString('=', this.nameIndent, 0);
+  g.drawString(this.shootingMode, 57, 0);
 
-  this.g.drawString('direc', 8, this.indent);
-  this.g.drawString('=', this.nameIndent, this.indent);
-  this.g.drawString(this.dirDisplay, 57, this.indent);
+  g.drawString('direc', 8, this.indent);
+  g.drawString('=', this.nameIndent, this.indent);
+  g.drawString(this.dirDisplay, 57, this.indent);
 
-  this.g.drawString('steps', 8, this.indent * 2);
-  this.g.drawString('=', this.nameIndent, this.indent * 2);
-  this.g.drawString(this.allSteps, 57, this.indent * 2);
+  g.drawString('steps', 8, this.indent * 2);
+  g.drawString('=', this.nameIndent, this.indent * 2);
+  g.drawString(this.allSteps, 57, this.indent * 2);
 
-  this.g.flip();
+  g.flip();
 }
 
 function IrInput(btn) {
@@ -570,7 +575,7 @@ function NumControl() {
 }
 
 function Start() {
-  digitalWrite(pinEn, 0);
+  digitalWrite(pinEn, stOn);
   digitalWrite(this.pinLaser, this.rOff);
   if (this.shootingMode === 'nonST') {
     this.startFlag = true;
@@ -590,7 +595,7 @@ function Stop() {
   clearInterval();
   this.startFlag = false;
   digitalWrite(this.pinStep, 0);
-  digitalWrite(pinEn, 1);
+  digitalWrite(pinEn, stOff);
   digitalWrite(this.pinRelay, this.rOff);
   digitalWrite(this.pinLaser, this.rOn);
   //P8.mode('analog');
@@ -689,8 +694,8 @@ function StepperAccMin() {
       return;
     } else if (this.shootingMode === 'PingP' && this._speed <= 0 && this.direction === 0) {
       clearInterval(accTimerMin);
-      this.direction = 1
-      digitalWrite(this.pinDir, this.direction);;
+      this.direction = 1;
+      digitalWrite(this.pinDir, this.direction);
       StepperAccMax();
       return;
     }
@@ -745,12 +750,12 @@ function BtnStop() {
 function infiniteRotation() {
   digitalWrite(this.pinLaser, this.rOff);
   this.infiniteFlag = true;
-  this.g.clear();
-  this.g.setFontVector(20);
-  this.g.drawString('infinite', 0, 0);
-  this.g.flip();
+  g.clear();
+  g.setFontVector(20);
+  g.drawString('infinite', 0, 0);
+  g.flip();
 
-  digitalWrite(this.pinEn, 0);
+  digitalWrite(pinEn, stOn);
 
   var accTimerMax = setInterval(function () {
     analogWrite(this.pinStep, 0.5, { freq : this._speed } );
@@ -763,12 +768,12 @@ function infiniteRotation() {
 }
 
 function deg90() {
-  this.g.clear();
-  this.g.setFontVector(20);
-  this.g.drawString('turn to 90', 0, 0);
-  this.g.flip();
+  g.clear();
+  g.setFontVector(20);
+  g.drawString('turn to 90', 0, 0);
+  g.flip();
 
-  digitalWrite(this.pinEn, 0);
+  digitalWrite(pinEn, stOn);
   analogWrite(this.pinStep, 0.5, { freq : this.speed } );
   var turn = 0;
   setInterval(function () {
@@ -782,12 +787,12 @@ function deg90() {
 
 function Calibration() {
   this.calibration = true;
-  this.g.clear();
-  this.g.setFontVector(20);
-  this.g.drawString('calibration', 0, 0);
-  this.g.flip();
+  g.clear();
+  g.setFontVector(20);
+  g.drawString('calibration', 0, 0);
+  g.flip();
 
-  digitalWrite(this.pinEn, 0);
+  digitalWrite(pinEn, stOn);
   this.step1 = true;
   this.allSteps = 0;
   analogWrite(this.pinStep, 0.5, { freq : this.speed } );
@@ -797,11 +802,12 @@ function Calibration() {
  }, 1);
 }
 
-this.loadingTimer = setTimeout(function () {
-  
-  this.g = require("SSD1306").connect(I2C1, LogoDisplay);
-      clearTimeout(this.loadingTimer);
-    }, 100);
-function onInit() {
- I2C1.setup({scl:B8, sda:B9});
+I2C1.setup({scl:B8, sda:B9});
+var g = {};
+function displayInit() {
+  var loadingTimer = setTimeout(function () {
+    g = require("SSD1306").connect(I2C1, LogoDisplay);
+  }, 1000);
 }
+displayInit();
+
