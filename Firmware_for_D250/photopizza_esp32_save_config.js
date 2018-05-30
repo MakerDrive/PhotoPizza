@@ -36,7 +36,7 @@ var config = {
   state: 'waiting',//started
   framesLeft: 36,
   frame: 36,
-  allSteps: 109000,
+  allSteps: 23650,
   pause: 100,
   delay: 300,
   speed: 3000,

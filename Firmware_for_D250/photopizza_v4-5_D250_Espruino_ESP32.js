@@ -105,7 +105,7 @@ function  PhotoPizzaInit() {
   var steps = [];
   var stepperPins = [D12,D14,D27,D26];
   var speed;
-  var _speed = 50;
+  var _speed = 3;
   var accSteps = 0;
 
   //RELAY
@@ -295,17 +295,17 @@ function  PhotoPizzaInit() {
       return;
     }
     
-    if (step < accSteps && _speed > 10) {
-      _speed -= accSteps / 40;
-    } else if (step >= (config.allSteps / config.frame) - accSteps && _speed < 50 && config.state != 'infinity') {
-      _speed += accSteps / 40;
-    }
-    console.log(_speed);
+    // if (step < accSteps && _speed > 10) {
+    //   _speed -= accSteps / 40;
+    // } else if (step >= (config.allSteps / config.frame) - accSteps && _speed < 50 && config.state != 'infinity') {
+    //   _speed += accSteps / 40;
+    // }
+    //console.log(_speed);
     
     step++;
 
     if (step >= config.allSteps / config.frame && config.state != 'infinity') {
-      _speed = 50;
+      //_speed = 50;
       pause();
       return;
     }
@@ -315,7 +315,8 @@ function  PhotoPizzaInit() {
     
     var stepTimeout = setTimeout(function() {
       doStep();
-    }, _speed);
+
+    }, config.speed);
   }
 
   function pause() {
