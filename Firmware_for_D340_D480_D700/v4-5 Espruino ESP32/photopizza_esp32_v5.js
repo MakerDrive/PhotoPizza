@@ -42,16 +42,19 @@ var run = function () {
   var server;
 
   function wifiConnect() {
+
     wifi.connect(config.wifiSsid, {password: config.wifiPassword}, function() {
     
       console.log(`Web server running at http://${wifi.getIP().ip}:${config.wsPort}`);
       photoPizzaIp = wifi.getIP().ip;
+      StartDisplay();
     });
     
     server = require('ws').createServer();
     server.listen(config.wsPort);
     server.on("websocket", function(ws) {
       wsocket = ws;
+      ws.send(JSON.stringify(config));
       ws.on('message',function(msg) {
         var configIn = JSON.parse(msg);
         config = configIn;
@@ -62,6 +65,11 @@ var run = function () {
           config.state = 'started';
           ws.send(JSON.stringify(config));
         }
+
+        if (configIn.state === 'infinity' && config.state != 'started') {
+          infiniteRotation();
+          ws.send(JSON.stringify(config));
+        }
   
         if (configIn.state === 'stop') {
           BtnStop();
@@ -70,6 +78,11 @@ var run = function () {
       ws.on('close', function() {
         wsocket = false;
       });
+    });
+    wifi.on('disconnected', function() {
+      console.log('Lost WIFI! Disconnected.');
+      photoPizzaIp = 'disconnected';
+      StartDisplay();
     });
 
   }
@@ -356,6 +369,7 @@ var run = function () {
         clearInterval(preloader);
         NumControl();
         StartDisplay();
+        wifiConnect();
       }
     }, 10);
   }
@@ -370,7 +384,7 @@ var run = function () {
     g.flip();
     g.setFontBitmap();
     g.setFont8x16();
-    g.drawString(Math.floor(_shootingTime / 1000) + ' SECONDS', 0, 45);
+    g.drawString('IP:' + photoPizzaIp, 0, 45);
     g.flip();
   }
   
@@ -824,7 +838,7 @@ var run = function () {
     g = require("SH1106").connect(I2C1, LogoDisplay);
   }
   
-  wifiConnect();
+  
 };
 function onInit () {
   I2C1.setup({scl:D22, sda:D21});
@@ -832,6 +846,7 @@ function onInit () {
   
   var riadTimer = setTimeout(function () {
     config = JSON.parse(fs.readFileSync("config.txt"));
+    config.state = 'waiting';
     run();
   }, 100);
 }
