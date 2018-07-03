@@ -226,7 +226,7 @@ var run = function () {
       IrInput(btn);
       return;
     }
-    if (btn === 'SETUP' && !setupMode && !poweroff) {
+    if (btn === 'SETUP' && !setupMode && !poweroff && !infiniteFlag && !startFlag && !deg90flag) {
       SettingsDisplay_1();
       console.log('Setup');
       simNum = 0;
