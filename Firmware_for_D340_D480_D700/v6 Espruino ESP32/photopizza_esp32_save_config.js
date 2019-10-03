@@ -48,7 +48,7 @@ var config = {
 
 
 function saveConfig() {
-  fs.writeFileSync('config.txt', JSON.stringify(config));
+  fs.writeFileSync('cfg.htm', JSON.stringify(config));
   console.log('Save config');
 }
 
@@ -59,6 +59,6 @@ saveConfig();
 
 
 var riadTimer = setTimeout(function () {
-  var readConfig = JSON.parse(fs.readFileSync("config.txt"));
+  var readConfig = JSON.parse(fs.readFileSync("cfg.htm"));
   console.log(readConfig);
 }, 1000);
