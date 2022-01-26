@@ -10,6 +10,3 @@ using the detailed instructions, and you do not need deep knowledge in electroni
 http://PhotoPizza.org - ENG
 
 http://PhotoPizza.ru - RUS
-
-photopizza@makerdrive.ru
-
