@@ -6,7 +6,3 @@ PhotoPizza - is an open source project of the turntable for taking pictures of o
 The control unit platform is based on the Espruino.
 You can self-assemble the device from the available components,
 using the detailed instructions, and you do not need deep knowledge in electronics.
-
-http://PhotoPizza.org - ENG
-
-http://PhotoPizza.ru - RUS
