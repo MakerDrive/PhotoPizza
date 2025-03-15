@@ -1,8 +1,8 @@
+[![Watch the promo video](https://img.youtube.com/vi/ocshAWL1mxE/0.jpg)](https://youtu.be/ocshAWL1mxE?si=FHEazX_rP1Yjf2Of)
+
 # 📷 PhotoPizza DIY
 
 **PhotoPizza** is an open-source project for creating a turntable that allows you to take pictures of objects from all directions (3D-photo-360 spin-photo). The control unit platform is based on Espruino.
-
-[![Watch the promo video](https://img.youtube.com/vi/ocshAWL1mxE/0.jpg)](https://youtu.be/ocshAWL1mxE?si=FHEazX_rP1Yjf2Of)
 
 ![PhotoPizza Turntable](docs/pic/PhotoPizza_01.png)
 
