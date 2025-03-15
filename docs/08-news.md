@@ -16,7 +16,7 @@ We are excited to announce the release of new open source media players called I
 - **Pano Widget** - For spherical panoramic images
 - **Video Widget** - For embedding video content into visual narratives
 
-All widgets support adaptive content loading, full-screen display, mobile compatibility, and easy integration using custom HTML tags without requiring JavaScript knowledge.
+All widgets support adaptive content loading, full-screen display, mobile compatibility, and easy integration using custom HTML tags.
 
 These new players will significantly enhance how 3D scanned content created with PhotoPizza can be presented online, making it more interactive and engaging for viewers.
 
