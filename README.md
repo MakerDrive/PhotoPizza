@@ -39,9 +39,8 @@ Our documentation is organized into several sections for easier navigation:
 - [💾 Firmware](Firmware_for_D340_D480_D700/)
 - [📐 Laser Cutting Drawings](Drawings_for_laser_cutting/)
 
-![PhotoPizza in action](docs/pic/4096.webp)
-
 ## 📚 Related Articles
+![PhotoPizza in action](docs/pic/4096.webp)
 
 - [📝 PhotoPizza: From the idea to the Open Source DIY Project](https://rnd-pro.com/pulse/PhotoPizza/)
 - [📝 Interactive Media Spots](https://rnd-pro.com/pulse/interactive-media-spots/)
