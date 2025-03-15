@@ -48,6 +48,13 @@ Our documentation is organized into several sections for easier navigation:
 - [📝 ComplexScan](https://rnd-pro.com/pulse/ComplexScan/)
 - [📝 Web Images: Problems and Solutions](https://rnd-pro.com/pulse/web-images-problem/)
 
+## 📱 Social Media
+
+Follow us on social media for updates, tips, and community showcases:
+
+- [📸 Instagram](https://www.instagram.com/diy.photopizza/)
+- [🎬 YouTube](https://www.youtube.com/@PhotoPizza)
+
 ## 📞 Contact
 
 For inquiries, please contact: photopizza@rnd-pro.com
