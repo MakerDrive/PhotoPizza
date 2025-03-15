@@ -24,9 +24,9 @@ The PhotoPizza D850 turntable was used to create high-quality 3D scans of sculpt
 
 [🔍 View the full Sculptures Collection on Sketchfab](https://sketchfab.com/F360-Studio/collections/sculptures-author-sonia-kochina-7a43fd275bc540e8b928803b158ab76e)
 
-## Digital Benin Collection
+## Benin Kingdom Artifacts
 
-PhotoPizza D700 and D850 turntables were used in the digitization of historical artifacts from the Benin Kingdom for the Digital Benin project. These artifacts, housed in the Peter the Great Museum of Anthropology and Ethnography (the Kunstkamera), showcase the platform's application in cultural heritage preservation:
+PhotoPizza D700 and D850 turntables were used in the digitization of historical artifacts from the Benin Kingdom for the objet.art project (ArtClub Digital Heritage). These artifacts, housed in the Peter the Great Museum of Anthropology and Ethnography (the Kunstkamera), showcase the platform's application in cultural heritage preservation:
 
 - **Plaques with Images of Courtiers and Portuguese** - Bronze plaques with intricate relief details
 - **Head of Ruler Oba in Ceremonial Headdress** - Complex royal artifact with fine ornamental elements
@@ -36,7 +36,7 @@ PhotoPizza D700 and D850 turntables were used in the digitization of historical 
 
 This project demonstrates how PhotoPizza turntables contribute to global cultural heritage digitization initiatives, making historically significant artifacts accessible to researchers and the public worldwide.
 
-[🔍 View the Digital Benin 3D Collection](https://digitalbenin.org/institutions/198/3d)
+[🔍 View the Benin Kingdom Artifacts on Digital Benin](https://digitalbenin.org/institutions/198/3d)
 
 ## Evolution to ComplexScan
 
