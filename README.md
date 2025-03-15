@@ -34,7 +34,7 @@ PhotoPizza turntables have been used in professional 3D scanning projects, inclu
 
 ### Japanese Netsuke Collection
 
-The turntable was used to create detailed 3D scans of Japanese netsuke figurines from the State Hermitage Museum collection:
+The turntable was used to create detailed 3D scans of Japanese netsuke figurines from the State Hermitage Museum collection. During the process of improving 3D scanning automation, the ComplexScan prototype was developed, which significantly enhanced the quality and speed of digitizing these unique exhibits:
 
 - **Demon in Front of a Mirror** - Highly detailed wooden netsuke with intricate relief
 - **Coiled Carp** - Ivory and transparent horn netsuke with semi-transparent elements
@@ -42,7 +42,6 @@ The turntable was used to create detailed 3D scans of Japanese netsuke figurines
 - **Wind God Fujin** - Wooden netsuke with open mouth and movable parts
 
 [🔍 View the full Japanese Netsuke 3D scanning project](https://rnd-pro.com/pulse/3D-scanning-netsuke/)
-
 
 ## 🚀 Quick Start
 
