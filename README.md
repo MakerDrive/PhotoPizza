@@ -28,21 +28,6 @@ Our documentation is organized into several sections for easier navigation:
 - 🔍 3D scanning with laser scanners
 - 📷 3D scanning using photogrammetry methods
 
-## 🚀 Quick Start
-
-1. Choose your turntable size based on your needs
-2. Gather all the required components
-3. Follow the assembly instructions
-4. Install the firmware
-5. Connect to your camera
-6. Start shooting amazing 360° photos!
-
-## 📥 Downloads
-
-- [📱 Android App](https://github.com/PhotoPizza/remote/blob/master/PhotoPizza.apk)
-- [💾 Firmware](Firmware_for_D340_D480_D700/)
-- [📐 Laser Cutting Drawings](Drawings_for_laser_cutting/)
-
 ## 🏺 3D Scanning Examples
 
 PhotoPizza turntables have been used in professional 3D scanning projects, including the digitization of valuable museum artifacts. Here are some notable examples:
@@ -57,6 +42,22 @@ The turntable was used to create detailed 3D scans of Japanese netsuke figurines
 - **Wind God Fujin** - Wooden netsuke with open mouth and movable parts
 
 [🔍 View the full Japanese Netsuke 3D scanning project](https://rnd-pro.com/pulse/3D-scanning-netsuke/)
+
+
+## 🚀 Quick Start
+
+1. Choose your turntable size based on your needs
+2. Gather all the required components
+3. Follow the assembly instructions
+4. Install the firmware
+5. Connect to your camera
+6. Start shooting amazing 360° photos!
+
+## 📥 Downloads
+
+- [📱 Android App](https://github.com/PhotoPizza/remote/blob/master/PhotoPizza.apk)
+- [💾 Firmware](Firmware_for_D340_D480_D700/)
+- [📐 Laser Cutting Drawings](Drawings_for_laser_cutting/)
 
 ## 📚 Related Articles
 ![PhotoPizza in action](docs/pic/4096.webp)
