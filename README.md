@@ -39,6 +39,14 @@ Our documentation is organized into several sections for easier navigation:
 - [💾 Firmware](Firmware_for_D340_D480_D700/)
 - [📐 Laser Cutting Drawings](Drawings_for_laser_cutting/)
 
+## 📚 Related Articles
+
+- [📝 PhotoPizza: From the idea to the Open Source DIY Project](https://rnd-pro.com/pulse/PhotoPizza/)
+- [📝 Interactive Media Spots](https://rnd-pro.com/pulse/interactive-media-spots/)
+- [📝 ComplexScan AUTOBOX v1](https://rnd-pro.com/pulse/ComplexScan_AUTOBOX_v1/)
+- [📝 ComplexScan](https://rnd-pro.com/pulse/ComplexScan/)
+- [📝 Web Images: Problems and Solutions](https://rnd-pro.com/pulse/web-images-problem/)
+
 ## 📞 Contact
 
 For inquiries, please contact: photopizza@rnd-pro.com
