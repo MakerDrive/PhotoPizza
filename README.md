@@ -2,7 +2,7 @@
 
 **PhotoPizza** is an open-source project for creating a turntable that allows you to take pictures of objects from all directions (3D-photo-360 spin-photo). The control unit platform is based on Espruino.
 
-![PhotoPizza Turntable](https://raw.githubusercontent.com/wiki/MakerDrive/PhotoPizza/images/photopizza.jpg)
+![PhotoPizza Turntable](docs/pic/PhotoPizza_01.png)
 
 ## 📚 Documentation
 
