@@ -43,6 +43,21 @@ Our documentation is organized into several sections for easier navigation:
 - [💾 Firmware](Firmware_for_D340_D480_D700/)
 - [📐 Laser Cutting Drawings](Drawings_for_laser_cutting/)
 
+## 🏺 3D Scanning Examples
+
+PhotoPizza turntables have been used in professional 3D scanning projects, including the digitization of valuable museum artifacts. Here are some notable examples:
+
+### Japanese Netsuke Collection
+
+The turntable was used to create detailed 3D scans of Japanese netsuke figurines from the State Hermitage Museum collection:
+
+- **Demon in Front of a Mirror** - Highly detailed wooden netsuke with intricate relief
+- **Coiled Carp** - Ivory and transparent horn netsuke with semi-transparent elements
+- **Dog, Puppies, and an Old Hat** - Complex geometry with numerous small details
+- **Wind God Fujin** - Wooden netsuke with open mouth and movable parts
+
+[🔍 View the full Japanese Netsuke 3D scanning project](https://rnd-pro.com/pulse/3D-scanning-netsuke/)
+
 ## 📚 Related Articles
 ![PhotoPizza in action](docs/pic/4096.webp)
 
