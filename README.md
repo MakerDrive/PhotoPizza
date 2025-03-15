@@ -25,6 +25,8 @@ Our documentation is organized into several sections for easier navigation:
 - 📊 Customizable shooting parameters
 - 🎥 Support for both photo and video shooting
 - 📐 Various turntable sizes (D250, D340, D480, D700, D850)
+- 🔍 3D scanning with laser scanners
+- 📷 3D scanning using photogrammetry methods
 
 ## 🚀 Quick Start
 
