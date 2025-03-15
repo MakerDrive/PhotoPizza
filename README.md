@@ -16,6 +16,7 @@ Our documentation is organized into several sections for easier navigation:
 4. [📱 Control Methods](docs/04-control-methods.md) - IR Remote, Android App, and Wi-Fi control
 5. [📸 Operation Guide](docs/05-operation-guide.md) - How to use PhotoPizza for shooting and calibration
 6. [🌟 Join the Community](docs/06-community.md) - How to contribute and contact information
+7. [🏺 3D Scanning Examples](docs/07-3d-scanning-examples.md) - Real-world examples of 3D scanning projects
 
 ## ✨ Features
 
@@ -27,21 +28,6 @@ Our documentation is organized into several sections for easier navigation:
 - 📐 Various turntable sizes (D250, D340, D480, D700, D850)
 - 🔍 3D scanning with laser scanners
 - 📷 3D scanning using photogrammetry methods
-
-## 🏺 3D Scanning Examples
-
-PhotoPizza turntables have been used in professional 3D scanning projects, including the digitization of valuable museum artifacts. Here are some notable examples:
-
-### Japanese Netsuke Collection
-
-The turntable was used to create detailed 3D scans of Japanese netsuke figurines from the State Hermitage Museum collection. During the process of improving 3D scanning automation, the ComplexScan prototype was developed, which significantly enhanced the quality and speed of digitizing these unique exhibits:
-
-- **Demon in Front of a Mirror** - Highly detailed wooden netsuke with intricate relief
-- **Coiled Carp** - Ivory and transparent horn netsuke with semi-transparent elements
-- **Dog, Puppies, and an Old Hat** - Complex geometry with numerous small details
-- **Wind God Fujin** - Wooden netsuke with open mouth and movable parts
-
-[🔍 View the full Japanese Netsuke 3D scanning project](https://rnd-pro.com/pulse/3D-scanning-netsuke/)
 
 ## 🚀 Quick Start
 
