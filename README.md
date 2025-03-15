@@ -17,6 +17,7 @@ Our documentation is organized into several sections for easier navigation:
 5. [📸 Operation Guide](docs/05-operation-guide.md) - How to use PhotoPizza for shooting and calibration
 6. [🌟 Join the Community](docs/06-community.md) - How to contribute and contact information
 7. [🏺 3D Scanning Examples](docs/07-3d-scanning-examples.md) - Real-world examples of 3D scanning projects
+8. [📰 Latest News](docs/08-news.md) - Recent updates and announcements
 
 ## ✨ Features
 

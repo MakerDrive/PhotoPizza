@@ -42,24 +42,4 @@ This project demonstrates how PhotoPizza turntables contribute to global cultura
 
 The experience gained from these and other 3D scanning projects led to the development of the ComplexScan system - a more advanced platform specifically designed for professional photogrammetric 3D scanning. This system builds upon the PhotoPizza foundation while adding specialized features for museum-quality digitization of artifacts.
 
-[🔬 Learn more about ComplexScan](https://rnd-pro.com/pulse/ComplexScan/)
-
-# 📰 Latest News
-
-## Interactive Media Spots - New Open Source Players
-
-We are excited to announce the release of new open source media players called Interactive Media Spots (IMS). These players are specifically designed to enhance the presentation of 3D content and other interactive media on the web.
-
-### Key Features:
-
-- **Gallery Widget** - For organized presentation of image sequences
-- **Diff Widget** - For showcasing differences between various states of objects
-- **Spinner Widget** - Perfect for 360° object visualization (ideal companion for PhotoPizza turntables)
-- **Pano Widget** - For spherical panoramic images
-- **Video Widget** - For embedding video content into visual narratives
-
-All widgets support adaptive content loading, full-screen display, mobile compatibility, and easy integration using custom HTML tags without requiring JavaScript knowledge.
-
-These new players will significantly enhance how 3D scanned content created with PhotoPizza can be presented online, making it more interactive and engaging for viewers.
-
-[🔍 Learn more about Interactive Media Spots](https://rnd-pro.com/pulse/interactive-media-spots/) 
+[🔬 Learn more about ComplexScan](https://rnd-pro.com/pulse/ComplexScan/) 
