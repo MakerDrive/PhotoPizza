@@ -24,6 +24,20 @@ The PhotoPizza D850 turntable was used to create high-quality 3D scans of sculpt
 
 [🔍 View the full Sculptures Collection on Sketchfab](https://sketchfab.com/F360-Studio/collections/sculptures-author-sonia-kochina-7a43fd275bc540e8b928803b158ab76e)
 
+## Digital Benin Collection
+
+PhotoPizza D700 and D850 turntables were used in the digitization of historical artifacts from the Benin Kingdom for the Digital Benin project. These artifacts, housed in the Peter the Great Museum of Anthropology and Ethnography (the Kunstkamera), showcase the platform's application in cultural heritage preservation:
+
+- **Plaques with Images of Courtiers and Portuguese** - Bronze plaques with intricate relief details
+- **Head of Ruler Oba in Ceremonial Headdress** - Complex royal artifact with fine ornamental elements
+- **Plaque with Image of Leopard** - Detailed zoomorphic representation with cultural significance
+- **Miniature Mask and Ceremonial Tusk** - Small-scale artifacts requiring precise rotation and lighting
+- **Figurines of Priests and Courtiers** - Sculptures with varied surface textures and patinas
+
+This project demonstrates how PhotoPizza turntables contribute to global cultural heritage digitization initiatives, making historically significant artifacts accessible to researchers and the public worldwide.
+
+[🔍 View the Digital Benin 3D Collection](https://digitalbenin.org/institutions/198/3d)
+
 ## Evolution to ComplexScan
 
 The experience gained from these and other 3D scanning projects led to the development of the ComplexScan system - a more advanced platform specifically designed for professional photogrammetric 3D scanning. This system builds upon the PhotoPizza foundation while adding specialized features for museum-quality digitization of artifacts.
